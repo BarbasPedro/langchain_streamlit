@@ -74,8 +74,9 @@ prompt_template = PromptTemplate.from_template(prompt)
 
 if st.button('Consultar'):
     if user_question:
-        formatted_template = prompt_template.format(q=user_question)
-        output = agent_executor.invoke({'input': formatted_template})
-        st.markdown(output.get('output'))
+        with st.spinner('Consultando o bando de dados...'):
+            formatted_template = prompt_template.format(q=user_question)
+            output = agent_executor.invoke({'input': formatted_template})
+            st.markdown(output.get('output'))
     else:
         st.warning('Por favor, faça uma pergunta.')
